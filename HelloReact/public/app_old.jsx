@@ -1,13 +1,12 @@
+//Till nested Components are static
 //Nested Component 1 -- Presentational Component
 //--Prsentational Component don't maintain states they are dummy components
 var GreaterMessage  = React.createClass ({
     render : function () {
-        var name = this.props.name;
-        var message  = this.props.message;
         return (
             <div>
-                <h1>Hi {name}!!!</h1>
-                <p>{message}</p>
+                <h1>Some H1</h1>
+                <p>Som Para</p>
             </div>
         );
     }
@@ -15,16 +14,6 @@ var GreaterMessage  = React.createClass ({
 
 //Nested Component 2 -- Input Component
 var GreaterForm = React.createClass ({
-    onFormSubmit : function (e) {
-        e.preventDefault();
-
-        var name = this.refs.name.value;
-
-        if (name.length>0) {
-            this.refs.name.value = "";
-            this.props.onNewName(name);
-        }
-    },
     render : function () {
         return (
             <form onSubmit={this.onFormSubmit}>
@@ -55,10 +44,22 @@ var Greater = React.createClass({
             name: this.props.name
         }
     },
-    handleNewName: function (name) { 
-        this.setState({
-            name: name
-        })
+    onButtonClick: function (e) { 
+        e.preventDefault(); //Prevent the form from submiiting and causing the refersh, pprevent full browser reload
+
+        var nameRef = this.refs.name;
+        var name = nameRef.value; //this represents the browser node and to get the value we use .value
+        //the react update only that part in which state is changes, 
+        //so we can see the value in text box even after update
+        //to clear the text from the browser
+        nameRef.value = ""; 
+
+        //for not updating with null string
+        if (typeof name === "string" && name.length > 0) {
+            this.setState({
+                name: name
+            });
+        }
     },
     render: function () {
         //Now to access the props this.props object
@@ -67,8 +68,14 @@ var Greater = React.createClass({
         var message = this.props.message;
         return (
             <div>
-                <GreaterMessage name={name} message={message}/>
-                <GreaterForm onNewName={this.handleNewName}/>
+                <h1>Hello {name}! </h1>
+                <p>{message + '!!'}</p>
+                <GreaterMessage/>
+                <form onSubmit={this.onButtonClick}>
+                    <input type="text" ref="name"/>
+                    <button>Set Name</button>
+                </form>
+                <GreaterForm/>
             </div>
         );
     }
