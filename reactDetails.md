@@ -48,16 +48,36 @@
 
   ------
 
-  ####  Hello React!
+####  Hello React!
 
-  - Render my first React app
-  - Add the script tag in index.html
-    - babel : 
-      - help us to use ES6 JavaScript features in our browser 
-      - convert jsx into javascript
-    - react
-    - react-dom
-      - is only necessary for web
-      - bcz react is also use on mobiles
-    - we can use web tags instead of script tags .
+- Render my first React app
+- Add the script tag in index.html
+  - babel : 
+    - help us to use ES6 JavaScript features in our browser 
+    - convert jsx into javascript
+  - react
+  - react-dom
+    - is only necessary for web
+    - bcz react is also use on mobiles
+  - we can use web tags instead of script tags .
+- make app.jsx inside public 
+- and provide the src of app.jsx inside the html instead of writing the code inside the html page
+
+------
+
+#### React Component
+
+React Components are the building block for our webapps UI.
+
+Our regular app is made up of several components everything rendering something to the browser.
+
+#### JSX
+
+- go to babel and paste the jsx code and we can see the working 
+- for each tag , React.creatElement is called
+
+#### Component Properties (props)
+
+- props is short form for properties which is a way  to pass data into your component
+  - <Greater name="Anushil"/>
 
