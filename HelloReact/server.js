@@ -15,5 +15,5 @@ app.use(express.static('public'));
 //2. Start The server
 //it takes the port Node, and the function that it will call
 app.listen(3000, function () {
-    console.log('Express Server is up on port 3000');
+    console.log('Express Server is up on port 3000 ');
 });

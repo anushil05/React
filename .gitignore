@@ -1,0 +1,5 @@
+#excluding node_modules
+HelloReact/node_modules
+
+#excluding reactDetails.md
+reactDeatils.md
