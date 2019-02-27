@@ -16,7 +16,7 @@ var Greater = React.createClass({
             name: this.props.name
         }
     },
-    onButtonClick: function (e) {
+    onButtonClick: function (e) { 
         e.preventDefault(); //Prevent the form from submiiting and causing the refersh, pprevent full browser reload
 
         var nameRef = this.refs.name;
