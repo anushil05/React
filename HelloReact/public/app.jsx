@@ -3,7 +3,7 @@
 var GreaterMessage  = React.createClass ({
     render : function () {
         var name = this.props.name;
-        var message  = this.props.message;
+        var message = this.props.message;
         return (
             <div>
                 <h1>Hi {name}!!!</h1>
@@ -18,18 +18,34 @@ var GreaterForm = React.createClass ({
     onFormSubmit : function (e) {
         e.preventDefault();
 
+        var updates = {};
         var name = this.refs.name.value;
+        var message = this.refs.message.value;
 
         if (name.length>0) {
             this.refs.name.value = "";
-            this.props.onNewName(name);
+            updates.name = name;
         }
+
+        if (message.length>0) {
+            this.refs.message.value="";
+            updates.message = message;
+        }
+
+        this.props.onNewUpdates(updates);
     },
     render : function () {
         return (
             <form onSubmit={this.onFormSubmit}>
-                <input type="text" ref="name"></input>
-                <button>Set Name!</button>
+                <div>
+                    <input type="text" ref="name" placeholder="Enter Name"></input>
+                </div>
+                <div>
+                    <input type="text" ref="message" placeholder="Enter Message"></input>
+                </div>
+                <div>
+                    <button>Submit!</button>
+                </div>
             </form>
         );
     }
@@ -52,35 +68,34 @@ var Greater = React.createClass({
     },
     getInitialState: function () {
         return {
-            name: this.props.name
+            name: this.props.name,
+            message: this.props.message
         }
     },
-    handleNewName: function (name) { 
-        this.setState({
-            name: name
-        })
+    handleNewUpdates: function (updates) { 
+        this.setState(updates);
     },
     render: function () {
         //Now to access the props this.props object
         //it stores all of our props
         var name = this.state.name;
-        var message = this.props.message;
+        var message = this.state.message;
         return (
             <div>
                 <GreaterMessage name={name} message={message}/>
-                <GreaterForm onNewName={this.handleNewName}/>
+                <GreaterForm onNewUpdates={this.handleNewUpdates}/>
             </div>
         );
     }
 });
 
 var firstName = 'Anushil';
-var mess = 'This is the message from props from a var using JSX';
+var message = 'This is the message from props from a var using JSX';
 
 ReactDOM.render(
-    // <Greater />,
+    <Greater />,
     // props passed into the Greater component 
     // <Greater name="Anushil"/>,
-    <Greater name={firstName} message={mess}/>,
+    // <Greater name={firstName} message={message}/>,
     document.getElementById('app')
 );
